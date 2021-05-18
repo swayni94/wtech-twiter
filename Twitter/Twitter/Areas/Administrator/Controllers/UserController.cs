@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Twitter.Core.Entity.Enum;
 using Twitter.Core.Service;
 using Twitter.Model.Entities;
-using Twitter.Models;
 
 namespace Twitter.Areas.Administrator.Controllers
 {
@@ -16,59 +12,35 @@ namespace Twitter.Areas.Administrator.Controllers
     public class UserController : Controller
     {
         private readonly ICoreService<User> userService;
-        private readonly IWebHostEnvironment env;
 
-        public UserController(ICoreService<User> userService, IWebHostEnvironment env)
+        public UserController(ICoreService<User> userService)
         {
             this.userService = userService;
-            this.env = env;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<User> users = userService.GetDefault(x => x.Title != "Admin");
+            return View(users);
         }
 
-        public IActionResult Insert()
+        public IActionResult Delete(Guid id)
         {
-            return View();
+            userService.Remove(userService.GetById(id));
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Insert(User item, List<IFormFile> files)
+        public IActionResult Activate(Guid id)
         {
-            if (ModelState.IsValid)
-            {
-                Upload upload = new Upload();
-                bool imgResult;
-                string imgPath = upload.ImageUpload(files, env, out imgResult);
-
-                if (imgResult)
-                {
-                    item.ImagePath = imgPath;
-                }
-                else
-                {
-                    ViewBag.Message = imgPath;
-                    return View();
-                }
-                bool result = userService.Add(item);
-                if (result)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    TempData["Message"] = $"Kayıt işleminde bir hata oluştu. Lütfen tüm alanları kontrol edip tekrar deneyin.";
-                }
-            }
-            else
-            {
-                TempData["Message"] = $"İşlem başarısız oldu. 1023241 hata koduyla başvurun.";
-            }
-
-            return View();
+            userService.Activate(id);
+            return RedirectToAction("Index");
+        }
+        public IActionResult Ban(Guid id)
+        {
+            User user = userService.GetById(id);
+            user.Status = Status.Banned;
+            bool result = userService.Update(user);
+            return RedirectToAction("Index");
         }
     }
 }

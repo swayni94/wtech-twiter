@@ -1,0 +1,60 @@
+﻿@model List<Tweet>
+@{
+    ViewData["Title"] = "Tweetler";
+}
+
+<div class="content-body">
+    <div class="row justify-content-between align-items-center mb-10">
+        <div class="col-12 col-lg-auto mb-20">
+            <div class="page-heading">
+                <h3 class="title">List <span>/ Tweet</span></h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mb-30">
+            <div class="box">
+                <div class="box-head">
+                    <a class="btn btn-primary" href="/Administrator/Post/Insert">Yeni Kayıt</a>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered data-table data-table-default">
+                        <thead>
+                            <tr>
+                                <th>Tweet Detail</th>
+                                <th>Tags</th>
+                                <th>Like Count</th>
+                                <th>Retweet Count</th>
+                                <th>Status</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.TweetDetail</td>
+                                <td>@item.Tags</td>
+                                <td>@item.LikeCount</td>
+                                <td>@item.RetweetCount</td>
+                                <td>
+                                    <partial name="PartialViews/_StatusPartial" model="@item.Status" />
+                                </td>
+                                <td>
+                                    <a class="btn" asp-controller="Post" asp-action="Activate" asp-route-id="@item.ID">Activate</a>
+                                    <a class="btn" asp-controller="Post" asp-action="Update" asp-route-id="@item.ID">Update</a>
+                                    <a class="btn" asp-controller="Post" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/admin/assets/js/plugins/datatables/datatables.min.js"></script>
+    <script src="~/admin/assets/js/plugins/datatables/datatables.active.js"></script>
+}

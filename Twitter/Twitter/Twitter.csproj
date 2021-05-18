@@ -34,5 +34,7 @@
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\uploads\" />
     <Folder Include="Areas\Administrator\Views\Home\" />
+    <Folder Include="Areas\Administrator\Views\User\" />
+    <Folder Include="Areas\Administrator\Views\Tweet\" />
   </ItemGroup>
 </Project>
