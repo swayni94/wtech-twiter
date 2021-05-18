@@ -33,5 +33,6 @@
     <Folder Include="Areas\Administrator\Views\Shared\PartialViews\" />
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\uploads\" />
+    <Folder Include="Areas\Administrator\Views\Home\" />
   </ItemGroup>
 </Project>
