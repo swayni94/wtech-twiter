@@ -2,44 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Twitter</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="~/admin/assets/images/favicon.ico">
+    <link rel="stylesheet" href="~/admin/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="~/admin/assets/css/vendor/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/admin/assets/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="~/admin/assets/css/vendor/themify-icons.css">
+    <link rel="stylesheet" href="~/admin/assets/css/vendor/cryptocurrency-icons.css">
+    <link rel="stylesheet" href="~/admin/assets/css/plugins/plugins.css">
+    <link rel="stylesheet" href="~/admin/assets/css/helper.css">
+    <link rel="stylesheet" href="~/admin/assets/css/style.css">
+    <link id="cus-style" rel="stylesheet" href="~/admin/assets/css/style-primary.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Twitter</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <div class="main-wrapper">
+        <div class="content-body m-0 p-0">
+            <div class="row m-0 bg-dark d-flex justify-content-center">
+                <div class="container-fluid bg-dark" style="height: 100%; min-height: 100vh;">
+                    <div class="col-4 ">
+                        <img class="img-fluid col-2 mt-2 ml-20" src="../../../twitter_logo.png" />
+                        <ul>
+                            <li>
+                                <a class="text-light mt-2" style="font-size:1.6rem;"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+                            </li>
+                            <li>
+                                <a class="text-light mt-2" style="font-size:1.6rem;"><i class="fa fa-hashtag" aria-hidden="true"></i>Explore</a>
+                            </li>
+                            <li>
+                                <a class="text-light mt-2" style="font-size:1.6rem;"><i class="fa fa-bell-o" aria-hidden="true"></i>Notifications</a>
+                            </li>
+                            <li>
+                                <a class="text-light mt-2" style="font-size:1.6rem;"><i class="fa fa-envelope-square" aria-hidden="true"></i>Messages</a>
+                            </li>
+                            <li>
+                                <a class="text-light mt-2" style="font-size:1.6rem;"><i class="fa fa-bookmark-o" aria-hidden="true"></i>Bookmarks</a>
+                            </li>
+                            <li>
+                                <a class="text-light mt-2" style="font-size:1.6rem;"><i class="fa fa-list-alt" aria-hidden="true"></i>Lists</a>
+                            </li>
+                            <li>
+                                <a class="text-light mt-2" style="font-size:1.6rem;"><i class="fa fa-user" aria-hidden="true"></i>Profil</a>
+                            </li>
+                            <li>
+                                <a class="text-light mt-2" style="font-size:1.6rem;"><i class="fa fa-btc" aria-hidden="true"></i>More</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-4  bg-dark">
+                        <div class="container">
+                            <main role="main" class="pb-3">
+                                @RenderBody()
+                            </main>
+                        </div>
+                    </div>
+                    <div class="col-4">
+
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @*<header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Twitter</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
         <div class="container">
-            &copy; 2021 - Twitter - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - Twitter - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

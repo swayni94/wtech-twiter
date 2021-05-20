@@ -36,5 +36,6 @@
     <Folder Include="Areas\Administrator\Views\Home\" />
     <Folder Include="Areas\Administrator\Views\User\" />
     <Folder Include="Areas\Administrator\Views\Tweet\" />
+    <Folder Include="Views\Main\" />
   </ItemGroup>
 </Project>

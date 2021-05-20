@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Twitter.Core.Entity.Enum;
 using Twitter.Core.Service;
 using Twitter.Model.Entities;
@@ -20,7 +16,6 @@ namespace Twitter.Controllers
     {
         private readonly ICoreService<User> userService;
         private readonly IWebHostEnvironment env;
-        private readonly ILogger<HomeController> _logger;
 
         public HomeController(ICoreService<User> userService, IWebHostEnvironment env)
         {
@@ -32,17 +27,6 @@ namespace Twitter.Controllers
         {
             return View();
         }
-        /*
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }*/
 
         public IActionResult Login()
         {
@@ -65,17 +49,15 @@ namespace Twitter.Controllers
                 new Claim("Image", logged.ImagePath)
                 };
 
-                //Giriş işlemleri ve ardından yönetici sayfasına yönlendireceğiz
                 var userIdentity = new ClaimsIdentity(claims, "login");
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                 await HttpContext.SignInAsync(principal);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Main");
             }
 
             return View();
         }
 
-        [HttpGet]
         public IActionResult Register()
         {
             return View();

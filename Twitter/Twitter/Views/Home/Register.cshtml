@@ -30,7 +30,7 @@
                 <div class="box col-4 bg-dark" style="height: 100%; min-height: 100vh;">
                     <img class="img-fluid col-2 mt-20" src="../../../twitter_logo.png" />
                     <h1 class="col-12 text-light mt-10" style="font-size:2.5rem;">Twitter'a giriş yap</h1>
-                    <form asp-controller="Home" asp-action="Register" enctype="multipart/form-data" >
+                    <form asp-controller="Home" asp-action="Register" enctype="multipart/form-data">
                         <label asp-for="FirstName" class="control-label" hidden></label>
                         <input asp-for="FirstName" class="form-control col-8 bg-dark mt-5 text-light" type="text" placeholder="First Name" />
                         <label asp-for="LastName" class="control-label" hidden></label>
@@ -39,12 +39,11 @@
                         <input asp-for="EmailAddress" class="form-control col-8 bg-dark mt-5 text-light" type="text" placeholder="Email Address" />
                         <label asp-for="Password" class="control-label" hidden></label>
                         <input asp-for="Password" class="form-control col-8 bg-dark mt-5 text-light" type="password" placeholder="Password" />
-                        <div class= "col-8 mt-5 p-0">
+                        <div class="col-8 mt-5 p-0">
                             <input class="form-control bg-dark" type="file" name="files">
                         </div>
+                        <button class="col-8 btn btn-primary btn-lg btn-block text-light mt-20" style="border-radius:50px;">Kaydol</button>
                     </form>
-                    <a class="col-8 btn btn-primary btn-lg btn-block text-light mt-20" style="border-radius:50px;" asp-controller="Home" asp-action="Register">Kaydol</a>
-
                     <a class="col-8 text-primary mt-3" asp-controller="Home" asp-action="Login">Twitter'a giriş yap</a>
                 </div>
             </div>
