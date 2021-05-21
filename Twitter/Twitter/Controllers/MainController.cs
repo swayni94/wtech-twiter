@@ -25,6 +25,7 @@ namespace Twitter.Controllers
         public IActionResult Index()
         {
             List<Tweet> tweets = tweewService.GetActive();
+            tweets.Reverse();
             foreach (var item in tweets)
             {
                 item.User = userService.GetById(item.UserID);
@@ -52,25 +53,30 @@ namespace Twitter.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult TweetLike(Guid guid)
+        public IActionResult TweetLike(Guid id)
         {
-            Tweet tweet = tweewService.GetById(guid);
+            Tweet tweet = tweewService.GetById(id);
             tweet.LikeCount++;
             tweewService.Update(tweet);
             return RedirectToAction("Index", "Main");
         }
 
-        [HttpPost]
-        public IActionResult TweetRetweet(Guid guid)
+        public IActionResult TweetRetweet(Guid id)
         {
-            if (tweewService.Any(x=> x.ID == guid && x.UserID != Guid.Parse(HttpContext.Session.GetString("ID"))))
+            if (tweewService.Any(x=> x.ID == id && x.UserID != Guid.Parse(HttpContext.Session.GetString("ID"))))
             {
-                Tweet tweet = tweewService.GetById(guid);
-                User user = userService.GetById(Guid.Parse(HttpContext.Session.GetString("ID")));
+                Tweet tweet = tweewService.GetById(id);
+                Tweet reTweet = new Tweet
+                {
+                    TweetDetail = tweet.TweetDetail,
+                    Tags = tweet.Tags,
+                    UserID = Guid.Parse(HttpContext.Session.GetString("ID")),
+                    RetweetCount = 0,
+                    LikeCount = 0
+                };
                 tweet.RetweetCount++;
-                tweet.UserID = user.ID;
-                tweewService.Add(tweet);
+                tweewService.Update(tweet);
+                bool term = tweewService.Add(reTweet);
             }
             return RedirectToAction("Index", "Main");
         }
