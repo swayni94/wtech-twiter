@@ -1,0 +1,13 @@
+﻿@model Tweet
+
+@{
+
+}
+
+
+<form asp-controller="Main" asp-action="CreateTweet" class="col-12 pt-10 pb-10 d-flex">
+    <div class="col-10">
+        <textarea class="form-control text-light border-bottom border-dark" asp-for="TweetDetail" placeholder="What's happening" style="height:6rem; background-color:transparent; resize:none; border:none"></textarea>
+        <button class="btn btn-primary mt-2" style="border-radius:50px; float:right">Tweet</button>
+    </div>
+</form>

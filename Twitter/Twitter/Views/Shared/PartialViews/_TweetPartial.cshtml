@@ -1,0 +1,32 @@
+﻿@model Tweet
+
+
+<div class="col-12 d-flex mb-2 border-bottom border-dark" style="background-color:black;">
+    <div class="col-2">
+        <img class="col-12" src="@Model.User.ImagePath.ToString()" />
+    </div>
+    <div class="col-10" style="background-color:transparent;">
+        <h6 class="col-12 text-light">@Model.User.FirstName @Model.CreatedDate.Value.ToShortDateString()</h6>
+        <p class="col-12 text-light">@Model.TweetDetail</p>
+        <div class="col-6 d-flex justify-content-between">
+            <a class="text-light mt-2"><i class="fa fa-comment-o" aria-hidden="true"></i></a>
+            <a class="text-light mt-2" asp-controller="Main" asp-action="TweetRetweet" asp-route-id="@Model.ID">
+                <i class="fa fa-retweet" aria-hidden="true"></i>
+                @{if (Model.RetweetCount != 0)
+                    {
+                        @Model.RetweetCount;
+                    }
+                }
+            </a>
+            <a class="text-light mt-2" asp-controller="Main" asp-action="TweetLike" asp-route-id="@Model.ID">
+                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                @{if (Model.LikeCount != 0)
+                    {
+                        @Model.LikeCount;
+                    }
+                }
+            </a>
+        </div>
+        
+    </div>
+</div>

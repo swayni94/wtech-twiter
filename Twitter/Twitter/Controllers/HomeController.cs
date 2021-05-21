@@ -40,6 +40,12 @@ namespace Twitter.Controllers
             {
                 User logged = userService.GetByDefault(x => x.EmailAddress == user.EmailAddress && x.Password == user.Password);
 
+                HttpContext.Session.SetString("ID", logged.ID.ToString());
+                HttpContext.Session.SetString("Name", logged.FirstName);
+                HttpContext.Session.SetString("Surname", logged.LastName);
+                HttpContext.Session.SetString("Email", logged.EmailAddress);
+                HttpContext.Session.SetString("Image", logged.ImagePath);
+
                 var claims = new List<Claim>()
                 {
                 new Claim("ID", logged.ID.ToString()),
