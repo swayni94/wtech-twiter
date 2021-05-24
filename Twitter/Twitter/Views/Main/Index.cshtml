@@ -1,15 +1,16 @@
 ﻿@model Tuple<User, List<Tweet>>
+
 @{
     Layout = "_Layout";
 }
 
 
-<div class="box col-12 p-0">
-    <div class="col-12 border-bottom border-secondary p-0" style="background-color:black;">
+<div class="box col-12 p-0" style="background-color:black;">
+    <div class="col-12 border-bottom border-secondary p-0" style="background-color:transparent;">
         <h2 class="text-light">Home</h2>
     </div>
 
-    <div class="col-12 d-flex border-bottom border-secondary p-0" style="background-color:black;">
+    <div class="col-12 d-flex border-bottom border-secondary p-0" style="background-color:transparent;">
         <div class="col-2 pt-10">
             <img class="col-12" src="@Model.Item1.ImagePath" />
         </div>
@@ -18,7 +19,7 @@
         </div>
     </div>
 
-    <div class="col-12 bg-dark border-bottom border-secondary" style="height:1rem;"></div>
+    <div class="col-12  bg-dark border-bottom border-secondary" style="height:0.5rem;"></div>
     <div class="col-12" style="background-color:black;">
         @foreach (var item in Model.Item2)
         {

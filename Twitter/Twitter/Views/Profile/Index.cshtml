@@ -1,0 +1,42 @@
+﻿@model Tuple<User, List<Tweet>>
+@{
+    Layout = "_Layout";
+}
+
+
+
+<div class="box col-12 p-0" style="background-color:black;">
+    <div class="col-12 border-bottom border-secondary p-0" style="background-color:black;">
+        <a class="text-light mt-2" asp-controller="Main" asp-action="Index">
+            <div class="d-flex">
+                <i class="fa fa-arrow-left pt-9 pr-2" aria-hidden="true"></i>
+                <div>
+                    <h4 class="text-light">@Model.Item1.FirstName.ToUpper()</h4>
+                    <div class="d-flex" style="font-size:0.7rem;">Tweets count -> @Model.Item2.Count</div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="box col-12 pt-2" style="background-color:black;">
+        <div class="col-2 pl-2 rounded-circle" style="background-color:transparent;">
+            <img class="col-12" src="@Model.Item1.ImagePath" style="background-color:transparent;" />
+        </div>
+        <div class="text-muted pl-2" style="background-color:transparent;">
+            <h2 class="text-light"> @Model.Item1.FirstName @Model.Item1.LastName</h2>
+            <p> @Model.Item1.EmailAddress</p>
+            <p><i class="fa fa-calendar" aria-hidden="true"></i> @Model.Item1.CreatedDate tarihinde katıldı.</p>
+            <div style="background-color:transparent;">
+                <a>Takip edilen</a> <a>Takipçi</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 bg-dark border-bottom border-secondary" style="height:0.5rem;"></div>
+    <div class="col-12" style="background-color:black;">
+        @foreach (var item in Model.Item2)
+        {
+            <partial name="PartialViews/_TweetPartial" model="@item" />
+        }
+    </div>
+</div>

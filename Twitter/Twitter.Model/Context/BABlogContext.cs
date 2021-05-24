@@ -16,12 +16,14 @@ namespace Twitter.Model.Context
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tweet> Tweets { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<FollowUser> FollowUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CommentMap());
             modelBuilder.ApplyConfiguration(new TweetMap());
             modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new FollowUserMap());
             base.OnModelCreating(modelBuilder);
         }
 

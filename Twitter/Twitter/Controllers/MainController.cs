@@ -13,12 +13,14 @@ namespace Twitter.Controllers
     {
         private readonly ICoreService<Tweet> tweewService;
         private readonly ICoreService<User> userService;
+        private readonly ICoreService<FollowUser> followUserService;
         private readonly IWebHostEnvironment env;
 
-        public MainController(ICoreService<Tweet> tweewService, ICoreService<User> userService, IWebHostEnvironment env)
+        public MainController(ICoreService<Tweet> tweewService, ICoreService<User> userService, ICoreService<FollowUser> followUserService, IWebHostEnvironment env)
         {
             this.tweewService = tweewService;
             this.userService = userService;
+            this.followUserService = followUserService;
             this.env = env;
         }
 
@@ -30,7 +32,7 @@ namespace Twitter.Controllers
             {
                 item.User = userService.GetById(item.UserID);
             }
-
+            
             return View(Tuple.Create<User, List<Tweet>>(userService.GetById(Guid.Parse(HttpContext.Session.GetString("ID"))), tweets));
         }
 
@@ -46,7 +48,7 @@ namespace Twitter.Controllers
                 tweet.ImagePath = "";
                 tweet.Tags = "";
 
-                bool term = tweewService.Add(tweet);
+                tweewService.Add(tweet);
                 return RedirectToAction("Index", "Main");
             }
 
@@ -76,7 +78,7 @@ namespace Twitter.Controllers
                 };
                 tweet.RetweetCount++;
                 tweewService.Update(tweet);
-                bool term = tweewService.Add(reTweet);
+                tweewService.Add(reTweet);
             }
             return RedirectToAction("Index", "Main");
         }
