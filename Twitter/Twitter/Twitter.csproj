@@ -39,5 +39,8 @@
     <Folder Include="Views\Main\" />
     <Folder Include="Views\Shared\PartialViews\" />
     <Folder Include="Views\Profile\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\ConnectPeople\" />
+    <Folder Include="Models\ViewComponents\" />
   </ItemGroup>
 </Project>
