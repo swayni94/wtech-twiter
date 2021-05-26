@@ -42,5 +42,6 @@
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\ConnectPeople\" />
     <Folder Include="Models\ViewComponents\" />
+    <Folder Include="Views\ConnectPeople\" />
   </ItemGroup>
 </Project>

@@ -10,15 +10,23 @@ namespace Twitter.Models.ViewComponents
     public class ConnectPeopleViewComponent : ViewComponent
     {
         private readonly ICoreService<User> userService;
+        private readonly ICoreService<FollowUser> followService;
 
-        public ConnectPeopleViewComponent(ICoreService<User> userService)
+        public ConnectPeopleViewComponent(ICoreService<User> userService, ICoreService<FollowUser> followService)
         {
             this.userService = userService;
+            this.followService = followService;
         }
 
         public IViewComponentResult Invoke()
         {
-            return View(userService.GetDefault(u => u.ID != Guid.Parse(HttpContext.Session.GetString("ID")) && u.Status == Core.Entity.Enum.Status.Active && u.Title != "Admin").Take(4).ToList());
+            var users = userService.GetDefault(u => u.ID != Guid.Parse(HttpContext.Session.GetString("ID")) && u.Status == Core.Entity.Enum.Status.Active && u.Title != "Admin");
+            var followUsers = followService.GetAll();
+            foreach (var item in followUsers)
+            {
+                users.Remove(userService.GetById(item.ToUserId));
+            }
+            return View(users);
         }
     }
 }

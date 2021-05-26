@@ -14,11 +14,13 @@ namespace Twitter.Controllers
     {
         private readonly ICoreService<Tweet> tweewService;
         private readonly ICoreService<User> userService;
+        private readonly ICoreService<FollowUser> followService;
 
-        public ProfileController(ICoreService<Tweet> tweewService, ICoreService<User> userService)
+        public ProfileController(ICoreService<Tweet> tweewService, ICoreService<User> userService, ICoreService<FollowUser> followService)
         {
             this.tweewService = tweewService;
             this.userService = userService;
+            this.followService = followService;
         }
 
         public IActionResult Index()
@@ -30,14 +32,41 @@ namespace Twitter.Controllers
             {
                 item.User = userService.GetById(item.UserID);
             }
-
-            return View(Tuple.Create<User, List<Tweet>>(userService.GetById(userId), tweets));
+            var followFrom = followService.GetDefault(f => f.FromUserId == userId).Count;
+            var followTo = followService.GetDefault(f => f.ToUserId == userId).Count;
+            return View(Tuple.Create<User, List<Tweet>, int, int>(userService.GetById(userId), tweets, followFrom, followTo));
         }
 
 
         public IActionResult BackHome()
         {
             return RedirectToAction("Index", "Main");
+        }
+
+        public IActionResult FollowFrom()
+        {
+            var userId = Guid.Parse(HttpContext.Session.GetString("ID"));
+            var followfromlist = followService.GetDefault(f => f.FromUserId == userId);
+            var users = new List<User>();
+            foreach (var item in followfromlist)
+            {
+                users.Add(userService.GetByDefault(u => u.ID == item.FromUserId));
+            }
+
+            return View(users);
+        }
+
+        public IActionResult FollowTo()
+        {
+            var userId = Guid.Parse(HttpContext.Session.GetString("ID"));
+            var followtolist = followService.GetDefault(f => f.ToUserId == userId);
+            var users = new List<User>();
+            foreach (var item in followtolist)
+            {
+                users.Add(userService.GetByDefault(u => u.ID == item.ToUserId));
+            }
+
+            return View(users);
         }
     }
 }

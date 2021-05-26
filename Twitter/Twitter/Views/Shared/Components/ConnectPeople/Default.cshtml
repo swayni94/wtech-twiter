@@ -7,19 +7,19 @@
 
     @foreach (var item in Model)
     {
-<div class="col-12 d-flex p-1" style="background-color:transparent;">
-    <img src="@item.ImagePath" class="col-2 rounded-circle p-2" />
-    <div class="col-7 p-2" style="background-color:transparent;">
-        <h4 class="text-light">@item.FirstName @item.LastName</h4>
-        <p class="text-light">@item.EmailAddress</p>
-    </div>
-    <div class="col-3 p-0" style="background-color:transparent;">
-        <a class="col-12 btn btn-outline-primary text-primary" style="border-radius:25px; font-size:small;">Takip et</a>
-    </div>
-    <hr style="color:black;" />
-</div>
+        <div class="col-12 d-flex p-1" style="background-color:transparent;">
+            <img src="@item.ImagePath" class="col-2 rounded-circle p-2" />
+            <div class="col-7 p-2" style="background-color:transparent;">
+                <h4 class="text-light">@item.FirstName @item.LastName</h4>
+                <p class="text-light">@item.EmailAddress</p>
+            </div>
+            <div class="col-3 p-0" style="background-color:transparent;">
+                <a class="col-12 btn btn-outline-primary text-primary" style="border-radius:25px; font-size:small;">Takip et</a>
+            </div>
+            <hr style="color:black;" />
+        </div>
     }
     <div class="col-12" style="background-color:transparent;">
-        <a class="text-primary">Daha fazla göster</a>
+        <a class="text-primary" asp-action="Index" asp-controller="ConnectPeople">Daha fazla göster</a>
     </div>
 </div>

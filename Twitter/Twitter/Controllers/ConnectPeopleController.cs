@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Twitter.Core.Service;
 using Twitter.Model.Entities;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Twitter.Controllers
 {
@@ -25,21 +24,30 @@ namespace Twitter.Controllers
         public IActionResult Index()
         {
             var users = userService.GetDefault(u => u.ID != Guid.Parse(HttpContext.Session.GetString("ID")) && u.Status == Core.Entity.Enum.Status.Active && u.Title != "Admin");
-            var followUsers = followService.GetActive();
+            var followUsers = followService.GetAll();
             foreach (var item in followUsers)
             {
-                users.Remove(userService.GetById(item.FromUserId));
+                users.Remove(userService.GetById(item.ToUserId));
             }
             return View(users);
         }
 
+        [HttpGet]
         public async Task<IActionResult> FollowUser(Guid id)
         {
             var connect = new FollowUser();
             connect.FromUserId = Guid.Parse(HttpContext.Session.GetString("ID"));
             connect.ToUserId = id;
-            followService.Add(connect);
-            return View();
+            if (followService.Any(x=> x.ToUserId != id))
+            {
+                bool term = followService.Add(connect);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult MoreThen()
+        {
+            return RedirectToAction("Index", "ConnectPeople");
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿@model Tuple<User, List<Tweet>>
+﻿@model Tuple<User, List<Tweet>, int, int>
 @{
     Layout = "_Layout";
 }
-
-
-
 <div class="box col-12 p-0" style="background-color:black;">
     <div class="col-12 border-bottom border-secondary p-0" style="background-color:black;">
         <a class="text-light mt-2" asp-controller="Main" asp-action="Index">
@@ -26,14 +23,14 @@
             <h2 class="text-light"> @Model.Item1.FirstName @Model.Item1.LastName</h2>
             <p> @Model.Item1.EmailAddress</p>
             <p><i class="fa fa-calendar" aria-hidden="true"></i> @Model.Item1.CreatedDate tarihinde katıldı.</p>
-            <div style="background-color:transparent;">
-                <a>Takip edilen</a> <a>Takipçi</a>
+            <div class="d-flex justify-content-between" style="background-color:transparent;">
+                <a asp-action="FollowFrom" asp-controller="Profile">@Model.Item3 Takip edilen</a> <a asp-action="FollowTo" asp-controller="Profile">@Model.Item4 Takipçi</a>
             </div>
         </div>
     </div>
 
-    <div class="col-12 bg-dark border-bottom border-secondary" style="height:0.5rem;"></div>
-    <div class="col-12" style="background-color:black;">
+    <div class="col-12 bg-dark border-bottom border-secondary p-0" style="height:0.5rem;"></div>
+    <div class="col-12 p-0" style="background-color:black;">
         @foreach (var item in Model.Item2)
         {
             <partial name="PartialViews/_TweetPartial" model="@item" />

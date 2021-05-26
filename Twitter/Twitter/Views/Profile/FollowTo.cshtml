@@ -1,0 +1,27 @@
+﻿@model List<User>
+
+
+<div class="box col-12 p-0" style="background-color:black;">
+    <div class="col-12 border-bottom border-secondary p-0" style="background-color:black;">
+        <a class="text-light mt-2" asp-controller="Profile" asp-action="Index">
+            <div class="d-flex">
+                <i class="fa fa-arrow-left pt-9 pr-2" aria-hidden="true"></i>
+                <h4 class="text-light">Takipçi</h4>
+            </div>
+        </a>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="col-12 d-flex p-1 border-bottom border-secondary" style="background-color:transparent;">
+            <img src="@item.ImagePath" class="col-2 rounded-circle p-2" />
+            <div class="col-7 p-2" style="background-color:transparent;">
+                <h4 class="text-light">@item.FirstName @item.LastName</h4>
+                <p class="text-light">@item.EmailAddress</p>
+            </div>
+            @*<div class="col-3 p-0" style="background-color:transparent;">
+                    <a class="col-12 btn btn-outline-primary text-primary" style="border-radius:25px; font-size:small;" asp-action="FollowUser" asp-controller="ConnectPeople" asp-route-id="@item.ID">Takip et</a>
+                </div>*@
+        </div>
+    }
+</div>
